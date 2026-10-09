@@ -11,7 +11,6 @@ def check_url(url):
             return response.status == 200
     except Exception:
         print(f"Error occurred while checking {url}")
-        print(f"ERROR: {e}")
         return False
 
 
