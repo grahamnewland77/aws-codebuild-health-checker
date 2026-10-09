@@ -1,5 +1,7 @@
 import sys
 import urllib.request
+import json
+from datetime import datetime
 
 
 def check_url(url):
@@ -26,6 +28,16 @@ for url in urls:
     else:
         print(f"FAIL: {url}")
         failed_urls.append(url)
+
+report = {
+    "timestamp": datetime.now().isoformat(),
+    "checked": len(urls),
+    "passed": len(urls) - len(failed_urls),
+    "failed": failed_urls
+}
+
+with open("results.json", "w") as f:
+    json.dump(report, f, indent=2)
 
 if failed_urls:
     print("\nThe following URLs failed:")
