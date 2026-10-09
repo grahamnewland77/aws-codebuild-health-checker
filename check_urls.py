@@ -5,8 +5,11 @@ import urllib.request
 def check_url(url):
     try:
         with urllib.request.urlopen(url, timeout=10) as response:
+            print(f"Response code for {url}: {response.status}")
             return response.status == 200
     except Exception:
+        print(f"Error occurred while checking {url}")
+        print(f"ERROR: {e}")
         return False
 
 
