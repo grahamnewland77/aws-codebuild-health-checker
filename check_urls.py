@@ -1,6 +1,7 @@
 import sys
 import urllib.request
 import json
+import os
 from datetime import datetime
 
 
@@ -16,8 +17,16 @@ def check_url(url):
 
 failed_urls = []
 
-with open("urls.txt", "r") as file:
-    urls = [line.strip() for line in file if line.strip()]
+""" with open("urls.txt", "r") as file:
+    urls = [line.strip() for line in file if line.strip()] """
+
+url_list = os.environ.get("URLS")
+
+if url_list:
+    urls = [url.strip() for url in url_list.split(",")]
+else:
+    with open("urls.txt", "r") as file:
+        urls = [line.strip() for line in file if line.strip()]
 
 for url in urls:
     print(f"Checking {url}...")
